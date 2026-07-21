@@ -8,6 +8,10 @@ LUCI_TITLE:=LuCI W1700K Fan Control
 LUCI_PKGNAME:=luci-app-w1700k-fancontrol
 LUCI_DEPENDS:=+luci-base @TARGET_airoha
 
+ifneq ($(wildcard ../../luci.mk),)
 include ../../luci.mk
+else
+include $(TOPDIR)/feeds/luci/luci.mk
+endif
 
 # call BuildPackage - OpenWrt buildroot signature
