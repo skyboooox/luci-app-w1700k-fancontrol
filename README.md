@@ -129,7 +129,7 @@ chmod +x /etc/init.d/fan
 
 - OpenWrt with LuCI
 - Airoha AN7581 target (`@TARGET_airoha`)
-- NCT7802Y fan controller (hwmon5)
+- NCT7802Y fan controller exposed through hwmon
 - MT7996 WiFi (for radio temperature monitoring)
 
 ## Files
@@ -192,14 +192,14 @@ config curve 'custom'
 | Sensor | Source | Description |
 |--------|--------|-------------|
 | CPU | `/sys/class/thermal/thermal_zone0/temp` | AN7581 SoC die temperature |
-| Board | `/sys/class/hwmon/hwmon5/temp1_input` | NCT7802Y local sensor (fan curve input) |
-| 10G PHY | `/sys/class/hwmon/hwmon0/temp1_input` | 10 Gigabit Ethernet PHY |
-| Switch PHY | `/sys/class/hwmon/hwmon1/temp1_input` | Gigabit switch PHY |
-| WiFi 2.4G | `/sys/class/hwmon/hwmon2/temp1_input` | MT7996 2.4 GHz radio |
-| WiFi 5G | `/sys/class/hwmon/hwmon3/temp1_input` | MT7996 5 GHz radio |
-| WiFi 6G | `/sys/class/hwmon/hwmon4/temp1_input` | MT7996 6 GHz radio |
-| Fan RPM | `/sys/class/hwmon/hwmon5/fan1_input` | NCT7802Y tachometer input |
-| Fan PWM | `/sys/class/hwmon/hwmon5/pwm1` | NCT7802Y PWM output (0-255) |
+| Board | dynamically discovered `nct7802/temp1_input` | NCT7802Y local sensor (fan curve input) |
+| 10G PHY | dynamically discovered PHY hwmon | 10 Gigabit Ethernet PHY |
+| Switch PHY | dynamically discovered PHY hwmon | Gigabit switch PHY |
+| WiFi 2.4G | dynamically discovered MT7996 hwmon | MT7996 2.4 GHz radio |
+| WiFi 5G | dynamically discovered MT7996 hwmon | MT7996 5 GHz radio |
+| WiFi 6G | dynamically discovered MT7996 hwmon | MT7996 6 GHz radio |
+| Fan RPM | dynamically discovered `nct7802/fan1_input` | NCT7802Y tachometer input |
+| Fan PWM | dynamically discovered `nct7802/pwm1` | NCT7802Y PWM output (0-255) |
 
 ## Fan Curve Details
 
