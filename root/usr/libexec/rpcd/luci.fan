@@ -10,7 +10,7 @@ find_nct7802() {
 			return
 		fi
 	done
-	echo "/sys/class/hwmon/hwmon5"  # fallback
+	return 1
 }
 
 # Dynamically find mt7996 WiFi hwmon devices
@@ -76,7 +76,7 @@ get_status() {
 	# Read CPU temperature from thermal zone (AN7581 SoC die temp)
 	temp_cpu=$(read_temp "/sys/class/thermal/thermal_zone0/temp")
 
-	# Read temperatures from NCT7802 fan controller (hwmon5)
+	# Read temperatures from the dynamically discovered NCT7802 controller.
 	# temp1 = board local (used by hardware fan curve), temp2 = external (disconnected), temp4 = external
 	temp_board=$(read_temp "${HWMON}/temp1_input")
 
